@@ -13,6 +13,9 @@ public class Tic_Tac_Toe
         int countX = 0;
         int countO = 0;
         Scanner scanner = new Scanner(System.in);
+
+
+
         System.out.println("Enter cells: ");
         String str = scanner.nextLine();
         char[] charArray = str.toCharArray();
@@ -32,6 +35,44 @@ public class Tic_Tac_Toe
         System.out.println(" |");
 
         System.out.println("---------");
+
+        System.out.println ("Enter the coordinates:");
+        int userCoordLeftToRight = scanner.nextInt();
+        int userCoordBotToTop = scanner.nextInt();
+        int conversionCoord = 0;
+        switch (userCoordBotToTop)
+        {
+            case 1:
+                conversionCoord = userCoordLeftToRight + 6;
+                break;
+            case 2:
+                conversionCoord = userCoordLeftToRight + 3;
+                break;
+            case 3:
+                conversionCoord = userCoordLeftToRight;
+                break;
+        }
+
+        charArray[conversionCoord] = 'X';
+
+        System.out.println("---------");
+
+        System.out.print("| ");
+        System.out.print(charArray[1] + " " + charArray[2] + " " + charArray[3]);
+        System.out.println(" |");
+
+        System.out.print("| ");
+        System.out.print(charArray[4] + " " + charArray[5] + " " + charArray[6]);
+        System.out.println(" |");
+
+        System.out.print("| ");
+        System.out.print(charArray[7] + " " + charArray[8] + " " + charArray[9]);
+        System.out.println(" |");
+
+        System.out.println("---------");
+
+
+
 
         // Game State:
 
