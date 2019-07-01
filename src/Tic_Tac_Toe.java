@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.SocketHandler;
 
 public class Tic_Tac_Toe
 {
@@ -36,10 +37,36 @@ public class Tic_Tac_Toe
 
         System.out.println("---------");
 
+        // Human move
         System.out.println ("Enter the coordinates:");
-        int userCoordLeftToRight = scanner.nextInt();
-        int userCoordBotToTop = scanner.nextInt();
+
+        String userCoord1 = scanner.next();
+        String userCoord2 = scanner.next();
+
+        while (!userCoord1.matches("\\d+") || !userCoord2.matches("\\d+"))
+        {
+            System.out.println("You should enter numbers!");
+            userCoord1 = scanner.next();
+            userCoord2 = scanner.next();
+        }
+        int userCoordLeftToRight = Integer.parseInt(userCoord1);
+        int userCoordBotToTop = Integer.parseInt(userCoord2);
+
         int conversionCoord = 0;
+
+        while (
+                ((userCoordBotToTop < 1) || (userCoordBotToTop > 3)) ||
+                        ((userCoordLeftToRight < 1) || (userCoordLeftToRight > 3))
+        )
+        {
+            System.out.println("Coordinates should be from 1 to 3!");
+            System.out.println ("Enter the coordinates:");
+            userCoordLeftToRight = scanner.nextInt();
+            userCoordBotToTop = scanner.nextInt();
+        }
+
+
+
         switch (userCoordBotToTop)
         {
             case 1:
@@ -51,6 +78,28 @@ public class Tic_Tac_Toe
             case 3:
                 conversionCoord = userCoordLeftToRight;
                 break;
+        }
+
+
+        // This cell is occupied! Choose another one!
+
+        while (charArray[conversionCoord] != ' ')
+        {
+            System.out.println("This cell is occupied! Choose another one!");
+            userCoordLeftToRight = scanner.nextInt();
+            userCoordBotToTop = scanner.nextInt();
+            switch (userCoordBotToTop)
+            {
+                case 1:
+                    conversionCoord = userCoordLeftToRight + 6;
+                    break;
+                case 2:
+                    conversionCoord = userCoordLeftToRight + 3;
+                    break;
+                case 3:
+                    conversionCoord = userCoordLeftToRight;
+                    break;
+            }
         }
 
         charArray[conversionCoord] = 'X';
@@ -70,6 +119,9 @@ public class Tic_Tac_Toe
         System.out.println(" |");
 
         System.out.println("---------");
+
+
+
 
 
 
