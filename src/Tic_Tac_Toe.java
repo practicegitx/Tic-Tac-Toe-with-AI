@@ -73,7 +73,74 @@ public class Tic_Tac_Toe
                     }
                     break;
 
+                case "start medium user":
+                    printBlankBoard();
+                    while (true) {
+                        CompMediumMove(charArray, playerWillPlayX, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        humanMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
 
+                case "start user medium":
+                    printBlankBoard();
+                    while (true) {
+                        humanMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompMediumMove(charArray, playerWillPlayO, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+                case "start medium medium":
+                    printBlankBoard();
+                    while (true) {
+                        CompMediumMove(charArray, playerWillPlayX, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompMediumMove(charArray, playerWillPlayO, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+                case "start easy medium":
+                    printBlankBoard();
+                    while (true) {
+                        CompEasyMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompMediumMove(charArray, playerWillPlayO, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+                case "start medium easy":
+                    printBlankBoard();
+                    while (true) {
+                        CompMediumMove(charArray, playerWillPlayX, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompEasyMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
                 case "exit":
                     gameState = 6;
                     break;
@@ -199,6 +266,181 @@ public class Tic_Tac_Toe
         // "Game not finished" - when no side has a three in a row but the field has empty cells;
         //if (countX + countO < 9 && isWinX == false && isWinO == false && isImpossible == false)
         //   isNotFinished = true;
+    }
+    public static void CompMediumMove(char charArray[], char XorO, char Opponent) {
+
+        System.out.println("Making move level \"medium\"");
+        int[] freeFields = new int[10];
+        // charArray = {' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '}; ima ih 10, od 0 do 9
+        int countFreeField = 0;
+        int win = 0, block = 0, randomMove = 0;
+
+        char[] fieldXorO = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+        if (win == 0) {
+
+            for (int i = 1; i <= 9; i++) {
+                if (charArray[i] == XorO)
+                    fieldXorO[i] = charArray[i];
+            }
+
+            // If it can win in one move (if it has two in a row), it places a third to get three in a row and win.
+            if (fieldXorO[1] == fieldXorO[2] && charArray[3] == ' ')
+                charArray[3] = XorO;
+            else if (fieldXorO[1] == fieldXorO[3] && charArray[2] == ' ')
+                charArray[2] = XorO;
+            else if (fieldXorO[2] == fieldXorO[3] && charArray[1] == ' ')
+                charArray[1] = XorO;
+            else if (fieldXorO[4] == fieldXorO[5] && charArray[6] == ' ')
+                charArray[6] = XorO;
+            else if (fieldXorO[4] == fieldXorO[6] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[6] && charArray[4] == ' ')
+                charArray[4] = XorO;
+
+            else if (fieldXorO[7] == fieldXorO[8] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[7] == fieldXorO[9] && charArray[8] == ' ')
+                charArray[8] = XorO;
+            else if (fieldXorO[8] == fieldXorO[9] && charArray[7] == ' ')
+                charArray[7] = XorO;
+
+            else if (fieldXorO[1] == fieldXorO[4] && charArray[7] == ' ')
+                charArray[7] = XorO;
+            else if (fieldXorO[1] == fieldXorO[7] && charArray[4] == ' ')
+                charArray[4] = XorO;
+            else if (fieldXorO[4] == fieldXorO[7] && charArray[1] == ' ')
+                charArray[1] = XorO;
+
+            else if (fieldXorO[2] == fieldXorO[5] && charArray[8] == ' ')
+                charArray[8] = XorO;
+            else if (fieldXorO[2] == fieldXorO[8] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[8] && charArray[2] == ' ')
+                charArray[2] = XorO;
+
+            else if (fieldXorO[3] == fieldXorO[6] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[3] == fieldXorO[9] && charArray[6] == ' ')
+                charArray[6] = XorO;
+            else if (fieldXorO[6] == fieldXorO[9] && charArray[3] == ' ')
+                charArray[3] = XorO;
+
+            else if (fieldXorO[1] == fieldXorO[5] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[1] == fieldXorO[9] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[9] && charArray[1] == ' ')
+                charArray[1] = XorO;
+
+            else if (fieldXorO[3] == fieldXorO[5] && charArray[7] == ' ')
+                charArray[7] = XorO;
+            else if (fieldXorO[3] == fieldXorO[7] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[7] && charArray[3] == ' ')
+                charArray[3] = XorO;
+            else
+                block = 1;
+        }
+        // If the opponent can win in one move, it plays the third itself to block the opponent to win.
+
+        if (block == 1) {
+            for (int i = 1; i <= 9; i++) {
+                if (charArray[i] == Opponent)
+                    fieldXorO[i] = charArray[i];
+            }
+
+            if (fieldXorO[1] == fieldXorO[2] && charArray[3] == ' ')
+                charArray[3] = XorO;
+            else if (fieldXorO[1] == fieldXorO[3] && charArray[2] == ' ')
+                charArray[2] = XorO;
+            else if (fieldXorO[2] == fieldXorO[3] && charArray[1] == ' ')
+                charArray[1] = XorO;
+            else if (fieldXorO[4] == fieldXorO[5] && charArray[6] == ' ')
+                charArray[6] = XorO;
+            else if (fieldXorO[4] == fieldXorO[6] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[6] && charArray[4] == ' ')
+                charArray[4] = XorO;
+
+            else if (fieldXorO[7] == fieldXorO[8] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[7] == fieldXorO[9] && charArray[8] == ' ')
+                charArray[8] = XorO;
+            else if (fieldXorO[8] == fieldXorO[9] && charArray[7] == ' ')
+                charArray[7] = XorO;
+
+            else if (fieldXorO[1] == fieldXorO[4] && charArray[7] == ' ')
+                charArray[7] = XorO;
+            else if (fieldXorO[1] == fieldXorO[7] && charArray[4] == ' ')
+                charArray[4] = XorO;
+            else if (fieldXorO[4] == fieldXorO[7] && charArray[1] == ' ')
+                charArray[1] = XorO;
+
+            else if (fieldXorO[2] == fieldXorO[5] && charArray[8] == ' ')
+                charArray[8] = XorO;
+            else if (fieldXorO[2] == fieldXorO[8] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[8] && charArray[2] == ' ')
+                charArray[2] = XorO;
+
+            else if (fieldXorO[3] == fieldXorO[6] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[3] == fieldXorO[9] && charArray[6] == ' ')
+                charArray[6] = XorO;
+            else if (fieldXorO[6] == fieldXorO[9] && charArray[3] == ' ')
+                charArray[3] = XorO;
+
+            else if (fieldXorO[1] == fieldXorO[5] && charArray[9] == ' ')
+                charArray[9] = XorO;
+            else if (fieldXorO[1] == fieldXorO[9] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[9] && charArray[1] == ' ')
+                charArray[1] = XorO;
+
+            else if (fieldXorO[3] == fieldXorO[5] && charArray[7] == ' ')
+                charArray[7] = XorO;
+            else if (fieldXorO[3] == fieldXorO[7] && charArray[5] == ' ')
+                charArray[5] = XorO;
+            else if (fieldXorO[5] == fieldXorO[7] && charArray[3] == ' ')
+                charArray[3] = XorO;
+            else
+                randomMove = 1;
+
+        }
+
+        // Otherwise, it makes a random move.
+        if (randomMove == 1)
+        {
+            for (int i = 1; i <= 9; i++) {
+                if (charArray[i] == ' ') {
+                    freeFields[countFreeField] = i;
+                    countFreeField++;
+                }
+            }
+        Random random = new Random();
+        int randomNumber = random.nextInt(countFreeField);
+        int randomNum = freeFields[randomNumber];
+        charArray[randomNum] = XorO;
+        }
+
+        System.out.println("---------");
+
+        System.out.print("| ");
+        System.out.print(charArray[1] + " " + charArray[2] + " " + charArray[3]);
+        System.out.println(" |");
+
+        System.out.print("| ");
+        System.out.print(charArray[4] + " " + charArray[5] + " " + charArray[6]);
+        System.out.println(" |");
+
+        System.out.print("| ");
+        System.out.print(charArray[7] + " " + charArray[8] + " " + charArray[9]);
+        System.out.println(" |");
+
+        System.out.println("---------");
+
+
     }
     public static void CompEasyMove(char charArray[], char XorO)
     {
