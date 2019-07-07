@@ -4,40 +4,112 @@ public class Tic_Tac_Toe
 {
     public static void main(String[] args)
     {
-
+        Scanner scanner = new Scanner(System.in);
         int gameState = 0;
-        //System.out.println("Enter cells: ");
-        printBlankBoard();
+        int exit = 0;
+        int done;
         char[] charArray = {' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '};
-        while (true) {
-            humanMove(charArray);
-            CompEasyMove(charArray);
-            gameState = checkGameState(charArray);
-            if (gameState != 0)
-                break;
-        }
+        char playerWillPlayX = 'X';
+        char playerWillPlayO = 'O';
 
+        do {
+            System.out.println("Input command:");
+            String  gameStartExit = scanner.nextLine();
+            done = 1;
+            switch (gameStartExit) {
+                case "start user user":
+                    printBlankBoard();
+                    while (true) {
+                        humanMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        humanMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+                case "start user easy":
+                    printBlankBoard();
+                    while (true) {
+                        humanMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompEasyMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+                case "start easy user":
+                    printBlankBoard();
+                    while (true) {
+                        CompEasyMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        humanMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+                case "start easy easy":
+                    printBlankBoard();
+                    while (true) {
+                        CompEasyMove(charArray, playerWillPlayX);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                        CompEasyMove(charArray, playerWillPlayO);
+                        gameState = checkGameState(charArray);
+                        if (gameState != 0)
+                            break;
+                    }
+                    break;
+
+
+                case "exit":
+                    gameState = 6;
+                    break;
+
+                default:
+                    System.out.println("Bad parameters!");
+                    done = 0;
+                    continue;
+
+            }
+        }   while (done == 0);
+
+        //System.out.println("Enter cells: ");
         //String str = scanner.nextLine();
         //charArray = str.toCharArray();
 
         // Add switch (int gamestate = enumerator)
-
-
-
-        if (gameState == 1)
+        if (gameState == 6)
+            return;
+        else if (gameState == 1)
             System.out.println("X wins");
 
-        if (gameState == 2)
+        else if (gameState == 2)
             System.out.println("O wins");
 
-        if (gameState == 3)
+        else if (gameState == 3)
             System.out.println("Draw");
 
-        if (gameState == 4)
+        else if (gameState == 4)
             System.out.println("Impossible");
 
-        if (gameState == 5)
+        else if (gameState == 5)
             System.out.println("Game not finished");
+
+
+
     }
 
     public enum gameState {
@@ -128,21 +200,24 @@ public class Tic_Tac_Toe
         //if (countX + countO < 9 && isWinX == false && isWinO == false && isImpossible == false)
         //   isNotFinished = true;
     }
-    public static void CompEasyMove(char charArray[])
+    public static void CompEasyMove(char charArray[], char XorO)
     {
         System.out.println("Making move level \"easy\"");
-        int[] freeFields = new int [9];
+        int[] freeFields = new int [10];
+        // charArray = {' ', ' ', ' ',' ',' ',' ',' ',' ',' ',' '}; ima ih 10, od 0 do 9
         int countFreeField = 0;
         for (int i = 1; i <= 9; i++)
         {
             if (charArray[i] == ' ')
+            {
                 freeFields [countFreeField] = i;
-            countFreeField++;
+                countFreeField++;
+            }
         }
         Random random = new Random();
         int randomNumber = random.nextInt(countFreeField);
         int randomNum = freeFields[randomNumber];
-        charArray[randomNum] = 'O';
+        charArray[randomNum] = XorO;
 
         System.out.println("---------");
 
@@ -162,7 +237,7 @@ public class Tic_Tac_Toe
 
 
     }
-     public static void humanMove(char[] charArray)
+     public static void humanMove(char[] charArray, char XorO)
     {
          // Human Move, user input coordinates
         Scanner scanner = new Scanner (System.in);
@@ -231,7 +306,7 @@ public class Tic_Tac_Toe
         }
 
 
-        charArray[conversionCoord] = 'X';
+        charArray[conversionCoord] = XorO;
 
         System.out.println("---------");
 
